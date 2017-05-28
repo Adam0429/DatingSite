@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import db.database;
 import info.Login;
 
-
-@WebServlet("/servlet/studentser")
-public class studentser extends HttpServlet {			
+/**
+ * Servlet implementation class myservlet
+ */
+@WebServlet("/servlet/myservlet")
+public class myservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public studentser() {
+    public myservlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +29,7 @@ public class studentser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doPost(request, response);
+		
 	}
 
 	/**
@@ -35,8 +37,17 @@ public class studentser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Login login=new Login();
+		login.setName(request.getParameter("name"));
+		login.setTele(request.getParameter("tele"));
+		login.setAccount(request.getParameter("account"));
+		login.setPassword(request.getParameter("password"));
 		database d=new database();
 		d.save(login);
-		System.out.println("----213123post----");
+		System.out.println("-----post-----");
+		System.out.println(request.getParameter("name"));
+		System.out.println(request.getParameter("tele"));
+		System.out.println(request.getParameter("account"));
+		System.out.println(request.getParameter("password"));
 	}
+
 }

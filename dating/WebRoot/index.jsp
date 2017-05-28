@@ -27,8 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    %>
   	
-     <form action="/n1/servlet/studentser" method="post">
-     	<input type="text" name="name"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;
+     <form action="/dating/servlet/myservlet" method="post">
+     后宫团<br>
+     	注册<br>
+     	昵称:<input type="text" name="name"><br>
+     	性别:女<input type="radio" name="girl"><br>
+     	手机号:<input type="text" name="tele"><br>
+     	账号:<input type="text" name="account"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
+     	密码:<input type="text" name="password">
      	                      <br/><input type="submit" value="sumbmit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
      </form>
   </body>
