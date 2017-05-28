@@ -1,0 +1,6 @@
+create table login(
+name varchar(20),
+tele varchar(20),
+account varchar(20),
+password varchar(20)
+)character set = utf8;

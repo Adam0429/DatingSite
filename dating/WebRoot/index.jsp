@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    %>
   	
-     <form action="/dating/servlet/myservlet" method="post">
+     <form action="/dating/myser" method="post">
      后宫团<br>
      	注册<br>
      	昵称:<input type="text" name="name"><br>
