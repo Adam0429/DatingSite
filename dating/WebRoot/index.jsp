@@ -28,14 +28,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>
   	
      <form action="/dating/myser" method="post">
-     后宫团<br>
+     中蓝公寓通知群----一些重要的通知都会发放在这里,请同学们多多查看--来自校领导<br>
      	注册<br>
      	昵称:<input type="text" name="name"><br>
      	性别:女<input type="radio" name="girl"><br>
      	手机号:<input type="text" name="tele"><br>
      	账号:<input type="text" name="account"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
      	密码:<input type="text" name="password">
-     	                      <br/><input type="submit" value="sumbmit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
+     	                      <br/><input type="submit" value="submit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
+     	                          <input type="hidden" name="status" value="insert">
+     </form>
+     
+     <form action="/dating/query.jsp">
+    
+     <input type="submit" value="query">
+
      </form>
   </body>
   
