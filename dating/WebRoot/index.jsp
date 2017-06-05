@@ -36,14 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	账号:<input type="text" name="account"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
      	密码:<input type="text" name="password">
      	                      <br/><input type="submit" value="submit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
-     	                          <input type="hidden" name="status" value="insert">
-     </form>
      
-     <form action="/dating/query.jsp">
-    
-     <input type="submit" value="query">
-
+     	<input type="hidden" name="status" value="insert">
      </form>
+     	<form action="/dating/query.jsp">
+     		<input type="submit" value="query">
+         </form>
   </body>
   
 </html>
