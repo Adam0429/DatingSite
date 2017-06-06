@@ -31,16 +31,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <input type="hidden" name="status" value="query">
   
   </form>
+  <table  border="1">
+  	<tr>
+  		<td>name</td>
+  		<td>account</td>
+  		<td>telephone</td>
+  		<td>删除</td>
+  		<td>更新</td>
+  	</tr>
+  
+  
   <%
   	ArrayList<Login> arrayList=(ArrayList)request.getAttribute("Logins");
   	if(arrayList!=null){//判断是否为空,否则会有空指针错误
-   		%>
-   		<%out.print("name:"+arrayList.get(0).getName());%><br>
-   		<%out.print("account:"+arrayList.get(0).getAccount());%><br>
-   		<%out.print("telephone:"+arrayList.get(0).getTele());
-    }
+  	for(int i=0;i<arrayList.size();i++){
+   	%>
+   	<tr>
+   		<td><%out.print(arrayList.get(i).getName());%></td>
+   		<td><%out.print(arrayList.get(i).getAccount());%></td>
+   		<td><%out.print(arrayList.get(i).getTele());%></td>
+   		<td><a href="query.jsp">删除</td>
+  		<td><a href="query.jsp">更新</td>
+   	</tr>
+   	<% 
+    	}
+   	}
     else
     	out.print("no result");
     %>
+     
+    </table>
   </body>
 </html>

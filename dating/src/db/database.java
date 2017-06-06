@@ -39,7 +39,7 @@ public class database {
 		java.sql.ResultSet resultSet=null;
 		ArrayList<Login> arrayList=new ArrayList<Login>();
 		try{
-			statement=connection.prepareStatement("select * from login where name = ?");
+			statement=connection.prepareStatement("select * from login where name like ?");
 			statement.setString(1, name);
 			resultSet=statement.executeQuery();
 			while(resultSet.next()){

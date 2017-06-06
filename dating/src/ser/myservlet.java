@@ -75,8 +75,8 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			database d=new database();
 			ArrayList<Login> arrayList=d.query(request.getParameter("name"));
 			request.setAttribute("Logins", arrayList);//把ser的数据传到视图页面(jsp)
-			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");//ser-->jsp 跳转
-			dispatcher.forward(request, response);//???
+			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");//ser-->jsp 跳转,和重定向的区别就是,地址没有变化
+			dispatcher.forward(request, response);//转发s]
 		}
 		//System.out.println(request.getParameter("name"));
 		//System.out.println(request.getParameter("tele"));
