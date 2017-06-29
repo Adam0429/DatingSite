@@ -26,18 +26,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <form action="/dating/myser" method="post">
-  <input type="text" name="name"> <br>
-  <input type="submit" value="查询">
-  <input type="hidden" name="status" value="query">
-  
+  <input type="text" name="nameOraccount"> <br>
+  <input type="submit" value="用户名查询">
+  <input type="hidden" name="status" value="queryname">
+  <input type="submit" value="账号查询">
+  <input type="hidden" name="status" value="queryaccount">
   </form>
+  
   <table  border="1">
   	<tr>
   		<td>name</td>
   		<td>account</td>
   		<td>telephone</td>
-  		<td>删除</td>
   		<td>更新</td>
+  		<td>删除</td>
   	</tr>
   
   
@@ -50,8 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<td><%out.print(arrayList.get(i).getName());%></td>
    		<td><%out.print(arrayList.get(i).getAccount());%></td>
    		<td><%out.print(arrayList.get(i).getTele());%></td>
-   		<td><a href="query.jsp">删除</td>
-  		<td><a href="query.jsp">更新</td>
+  		<td><a href="/dating/update.jsp?account=<%=arrayList.get(i).getAccount()%>&name=<%=arrayList.get(i).getName() %>">更新</a></td><!-- href相当于表单,调用doGet -->
+  		<td><a href="/dating/myser?account=<%=arrayList.get(i).getAccount()%>&status=delete">删除</a></td>
+  		<!-- href=<百分号=path%> path作为变量名，<百分号= %>是取变量名。 -->
    	</tr>
    	<% 
     	}
