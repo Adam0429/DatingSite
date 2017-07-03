@@ -27,10 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <form action="/dating/myser" method="post">
   <input type="text" name="nameOraccount"> <br>
-  <input type="submit" value="用户名查询">
-  <input type="hidden" name="status" value="queryname">
-  <input type="submit" value="账号查询">
-  <input type="hidden" name="status" value="queryaccount">
+  <input type="submit" name="status" value="queryname">
+  <input type="submit" name="status" value="queryaccount">
   </form>
   
   <table  border="1">

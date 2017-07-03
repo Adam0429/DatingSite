@@ -41,7 +41,7 @@ public class database {
 		if(attribute=="name"){
 			try{
 				statement=connection.prepareStatement("select * from login where name like ?");
-				statement.setString(1, string);
+				statement.setString(1, "%"+string+"%");
 				resultSet=statement.executeQuery();
 				while(resultSet.next()){
 					Login login=new Login();
@@ -57,8 +57,8 @@ public class database {
 		}
 		else if(attribute=="account"){
 			try{
-				statement=connection.prepareStatement("select * from login where account == ?");
-				statement.setString(1, string);
+				statement=connection.prepareStatement("select * from login where account like ? ");
+				statement.setString(1, "%"+string+"%");
 				resultSet=statement.executeQuery();
 				while(resultSet.next()){
 					Login login=new Login();
