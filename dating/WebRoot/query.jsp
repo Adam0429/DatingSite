@@ -48,6 +48,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				<td><c:url value="/update.jsp" var="update">
    					<c:param name="account" value="${l.account}"></c:param><!-- 这个l.account会自动调用login里的get方法获取值,经试验没有get方法会报错,get方法名不影响运行 -->>
    					<c:param name="name" value="${l.name}"></c:param>
+   					<c:param name="tele" value="${l.tele}"></c:param>
+   					<c:param name="password" value="${l.password}"></c:param>
    					</c:url>
    					<a href="${update}">更新</a>			<!-- href相当于表单,调用doGet -->
    				</td>

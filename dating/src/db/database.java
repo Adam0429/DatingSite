@@ -1,10 +1,13 @@
 package db;
 
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+import info.Dormitory;
 import info.Login;
 
 public class database {
@@ -72,9 +75,29 @@ public class database {
 				e.printStackTrace();
 			}
 		}
+		
 		return arrayList;
+
 	}
 	
+	
+	public ArrayList<Dormitory> querydormitory(){
+		java.sql.ResultSet resultSet=null;
+		ArrayList<Dormitory> arrayList=new ArrayList<Dormitory>();
+		try{
+			statement=connection.prepareStatement("select * from dormitory");
+			resultSet=statement.executeQuery();
+			while(resultSet.next()){
+				Dormitory d=new Dormitory();
+				d.setName(resultSet.getString("name"));
+				arrayList.add(d);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arrayList;
+	}
+		
 	public void delete(String account){
 		try{
 			statement=connection.prepareStatement("delete from login where account = ?");

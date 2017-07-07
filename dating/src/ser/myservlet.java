@@ -74,7 +74,7 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 		}
 			
 		else if(status.equals("queryname")){//应考虑到账号重复的情况,服务器端能收到报错,用户并不知道错误
-			
+		
 			System.out.println("------queryname-----");
 			String nameOraccount=request.getParameter("nameOraccount").toString();
 			//request.getAttribute("username")是获取容器里面的值，在整个容器中有效,如tomcat

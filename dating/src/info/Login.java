@@ -1,10 +1,10 @@
 package info;
 
 public class Login {
-	String name; //封装的重要性
-	String account;
-	String password;
-	String tele;
+	private String name; //封装的重要性
+	private String account;
+	private String password;
+	private String tele;
 	public String getName() {
 		return name;
 	}

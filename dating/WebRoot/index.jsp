@@ -1,5 +1,6 @@
 <!-- jsp的声明 --,这个语句是用来拼装当前网页的相对路径的>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,7 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-  </head>
+  <%@page import="java.util.ArrayList"%>
+</head>
   
   <body>
   <%
@@ -35,10 +37,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	手机号:<input type="text" name="tele"><br>
      	账号:<input type="text" name="account"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
      	密码:<input type="text" name="password"><br>
+     	宿舍楼:<select name="dormitory">
+     		<option></option>
+     		<c:forEach items="${applicationScope.arraylist}" var="a">
+     		<option>${a.name}</option>
+     		</c:forEach>
+     		</select><br>
   		<input type="submit" value="submit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
      
      	<input type="hidden" name="status" value="insert">
-
+	</form>
   </body>
   
 </html>

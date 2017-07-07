@@ -4,3 +4,7 @@ tele varchar(20),
 account varchar(20) primary key,
 password varchar(20)
 )character set = utf8;
+
+create table dormitory(
+name varchar(20)
+)character set = utf8;

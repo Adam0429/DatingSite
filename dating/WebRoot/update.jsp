@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,12 +26,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     Update <br>
  	<form action="/dating/myser" method="post">
- 		账号:<%=request.getParameter("account") %><br>
-     	昵称:<input type="text" name="name" value="<%=request.getParameter("name")%>" style="width: 238px; "><br>
-     	手机号:<input type="text" name="tele"><br>
-     	密码:<input type="text" name="password"><br>
+ 		账号:${param.account}<br>
+     	昵称:<input type="text" name="name" value="${param.name}"><br>
+     	手机号:<input type="text" name="tele" value="${param.tele}"><br>
+     	密码:<input type="text" name="password" value="${param.password}"><br>
   		<input type="submit" value="update" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
      	<input type="hidden" name="status" value="update">	
-     	<input type="hidden" name="account" value="<%=request.getParameter("account")%>">
+     	<input type="hidden" name="account" value="${param.account}">
+     </form>
   </body>
 </html>

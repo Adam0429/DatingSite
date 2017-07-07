@@ -5,6 +5,14 @@
     <servlet-name>myser</servlet-name>
     <servlet-class>ser.myservlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>initser</servlet-name>
+    <servlet-class>ser.initservlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  
+  
+  
   <servlet-mapping>
     <servlet-name>myser</servlet-name>
     <url-pattern>/myser</url-pattern>
