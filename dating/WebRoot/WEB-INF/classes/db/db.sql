@@ -4,3 +4,4 @@ select * from dormitory;
 insert into dormitory values ("¿∂‘√‘∞");
 insert into dormitory values ("¿∂æ≤‘∞");
 insert into dormitory values ("¿∂∑º‘∞");
+

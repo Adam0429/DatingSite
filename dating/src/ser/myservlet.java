@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import javax.xml.ws.Dispatch;
 import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
 
 import db.database;
+import info.Dormitory;
 import info.Login;
 
 /**
@@ -32,8 +34,15 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
         // TODO Auto-generated constructor stub
     }
     
-    public void init(ServletConfig config) throws ServletException {//容器启动时运行
-		// TODO Auto-generated method stub
+    public void init() throws ServletException {
+    	//有两种init方法,分别是不带参数的init和init(ServletConfig config)
+    	/*在Servlet初始化的时候，会自动调用init(ServletConfig config)，Container会自动收集一些该Servlet的配置信息，
+    	生成一个ServletConfig的实例，通过调用该实例的四个getXXX方法（即ServletConfig,ServletContext接口中的四个方法），
+    	我们可以得到该Servlet的这些配置信息。
+    	如果忘记去调用super.init(config);
+    	GenericServlet的config属性不能初始化，以至于当调用getServletConfig()的时候，会有空指针exception
+    	init(ServletConfig config)  
+       	super.init(config);  如果子类复写init(ServletConfig config)方法时,忘写super.init(config),则运行汇报NullPointerException异常*/
     	System.out.println("init");
     }
 
@@ -72,7 +81,21 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			d.save(login);
 			
 		}
+		
+		else if(status.equals("insertdormitory")){
 			
+			System.out.println("-----insertdormitory-----");
+			
+
+			//及时同步,不然插入以后index界面里的arraylist不同步
+			Dormitory dormitory=new Dormitory();
+			dormitory.setName(request.getParameter("dormitory"));
+			d.savedormitory(dormitory);
+			ArrayList<Dormitory> arrayList= d.querydormitory();
+			ServletContext app = this.getServletContext();//application对象
+			app.setAttribute("arraylist", arrayList);
+		}
+		
 		else if(status.equals("queryname")){//应考虑到账号重复的情况,服务器端能收到报错,用户并不知道错误
 		
 			System.out.println("------queryname-----");
@@ -116,7 +139,7 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			ArrayList<Login> arrayList=d.query(request.getSession().getAttribute("nameOraccount").toString(),"account");
 			request.setAttribute("Logins", arrayList);
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
-			dispatcher.forward(request, response);//现在问题就在我删了以后，前一个query看不到了
+			dispatcher.forward(request, response);
 		}
 		
 		else if(status.equals("update")){

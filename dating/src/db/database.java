@@ -38,6 +38,17 @@ public class database {
 		}
 	}
 	
+	public void savedormitory(Dormitory dormitory){
+		try {
+			statement=connection.prepareStatement("insert into dormitory values (?)");
+			statement.setString(1, dormitory.getName());
+			statement.executeUpdate();
+			System.out.println("–¬Àﬁ…·≤Â»Î");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<Login> query(String string,String attribute){
 		java.sql.ResultSet resultSet=null;
 		ArrayList<Login> arrayList=new ArrayList<Login>();
