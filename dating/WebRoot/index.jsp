@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
      <form action="/dating/myser" method="post">
      中蓝公寓通知群----一些重要的通知都会发放在这里,请同学们多多查看--来自校领导<br>
-     	注册   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="query.jsp">query</a> <br>
+     	注册   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="query.jsp">-----查询-----</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="dormitory.jsp">----添加宿舍楼----</a> <br>
      	昵称:<input type="text" name="name"><br>
      	性别:女<input type="radio" name="girl"><br>
      	手机号:<input type="text" name="tele"><br>

@@ -120,6 +120,17 @@ public class database {
 		}
 	}
 	
+	public void deletedormitory(String dormitory){
+		try{
+			statement=connection.prepareStatement("delete from dormitory where name = ?");
+			statement.setString(1, dormitory);
+			statement.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void update(String account,String name,String tele,String password){
 		try{
 			statement=connection.prepareStatement("update login set name = ?,tele = ?,password = ? where account = ?");

@@ -1,6 +1,5 @@
-<!-- jsp的声明 --,这个语句是用来拼装当前网页的相对路径的>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>修改宿舍信息</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -21,20 +20,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-</head>
+
+  </head>
   
   <body>
-  <%
-
-   %>
-  	
-     <form action="/dating/dorser" method="post">
-     	添加新宿舍 <a href="updatedor.jsp">查询与更新</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.jsp">返回</a> <br>
-     	新宿舍名:<input type="text" name="dormitory"><br>
-  		<input type="submit" value="submit" style="color:red">
-     
-     	<input type="hidden" name="status" value="insertdormitory">
-	</form>
+    修改宿舍信息 <br>
+    <table borde="1">
+    	<tr>
+   			<td>编号</td>
+    		<td>宿舍名</td>
+    		<td>删除</td>
+		</tr>
+		<c:forEach items="${applicationScope.arraylist}" var="a" varStatus="num">
+			<tr>
+				<td>${num.count}</td>
+				<td>${a.name}</td>
+				<td><c:url value="/dorser" var="delete">
+				<c:param name="dormitory" value="${a.name}"></c:param>
+				<c:param name="status" value="deletedormitory"></c:param></c:url>
+				<a href="${delete}">删除</a></td>
+				
+			<tr>
+		</c:forEach>
+	</table>
   </body>
-  
 </html>

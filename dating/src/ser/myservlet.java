@@ -77,24 +77,10 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			login.setTele(request.getParameter("tele"));
 			login.setAccount(request.getParameter("account"));
 			login.setPassword(request.getParameter("password"));
-
 			d.save(login);
-			
+			response.sendRedirect("/dating/index.jsp");
 		}
 		
-		else if(status.equals("insertdormitory")){
-			
-			System.out.println("-----insertdormitory-----");
-			
-
-			//及时同步,不然插入以后index界面里的arraylist不同步
-			Dormitory dormitory=new Dormitory();
-			dormitory.setName(request.getParameter("dormitory"));
-			d.savedormitory(dormitory);
-			ArrayList<Dormitory> arrayList= d.querydormitory();
-			ServletContext app = this.getServletContext();//application对象
-			app.setAttribute("arraylist", arrayList);
-		}
 		
 		else if(status.equals("queryname")){//应考虑到账号重复的情况,服务器端能收到报错,用户并不知道错误
 		
@@ -106,12 +92,13 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			ArrayList<Login> arrayList=d.query(nameOraccount,"name");
 			request.setAttribute("Logins", arrayList);//把ser的数据传到视图页面(jsp)
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
-			/*重定向和转发都都始于服务器端，而提交表单，无论是从哪提交、提交到哪，都是由客户端发起。form不属于重定向和转发
-			硬要说相似的话，可以说像重定向的一个步骤，就是由浏览器请求重定向资源这步。
+			/*转发是,servlet用一个命令把一个页面返回给用户（用户->ser->页面->用户）,重定向是servlet告诉用户要去访问一个页面
+			 (用户->ser->用户->页面)
 			request.getRequestDispatcher()是请求转发，前后页面共享一个request
 			ser-->jsp 跳转,此跳转是内部跳转不能跳转到工程外的页面,和重定向的区别就是,地址没有变化*/
-			dispatcher.forward(request, response);//转发
-			/*当你要跳转页面但是你又要用到前一个页面的某些信息的时候可以用这个方法
+			dispatcher.forward(request, response);
+			/*两种方法用哪个取决于需求.数据共享->内部跳转.不需要->外部跳转(重定向)
+			 当你要跳转页面但是你又要用到前一个页面的某些信息的时候可以用这个方法
 			当你要跳转页面并且不需要用到前一个页面的信息时你可以选择用redirect（重定向）*/
 		}
 		

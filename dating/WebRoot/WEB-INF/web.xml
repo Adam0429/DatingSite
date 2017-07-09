@@ -5,17 +5,22 @@
     <servlet-name>myser</servlet-name>
     <servlet-class>ser.myservlet</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>dorser</servlet-name>
+    <servlet-class>ser.dorservlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>initser</servlet-name>
     <servlet-class>ser.initservlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
-  
-  
-  
   <servlet-mapping>
     <servlet-name>myser</servlet-name>
     <url-pattern>/myser</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>dorser</servlet-name>
+    <url-pattern>/dorser</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
