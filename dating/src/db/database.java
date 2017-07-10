@@ -26,11 +26,13 @@ public class database {
 	}
 	public void save(Login login){
 		try {
-			statement=connection.prepareStatement("insert into login values (?,?,?,?)");
-			statement.setString(1,login.getName());
-			statement.setString(2,login.getTele());
-			statement.setString(3,login.getAccount());
-			statement.setString(4,login.getPassword());
+			statement=connection.prepareStatement("insert into login values (?,?,?,?,?,?)");
+			statement.setString(1,login.getAccount());
+			statement.setString(2,login.getPassword());
+			statement.setString(3,login.getName());
+			statement.setString(4,login.getGender());
+			statement.setString(5,login.getTele());
+			statement.setString(6,login.getDormitory());
 			statement.executeUpdate();
 			System.out.println("新用户注册成功");
 		} catch (Exception e) {
@@ -63,6 +65,8 @@ public class database {
 					login.setTele(resultSet.getString("tele"));
 					login.setAccount(resultSet.getString("account"));
 					login.setPassword(resultSet.getString("password"));
+					login.setDormitory(resultSet.getString("dormitory_name"));
+					login.setGender(resultSet.getString("gender"));
 					arrayList.add(login);
 				}
 			}catch (Exception e) {
@@ -80,6 +84,8 @@ public class database {
 					login.setTele(resultSet.getString("tele"));
 					login.setAccount(resultSet.getString("account"));
 					login.setPassword(resultSet.getString("password"));
+					login.setDormitory(resultSet.getString("dormitory_name"));
+					login.setGender(resultSet.getString("gender"));
 					arrayList.add(login);
 				}
 			}catch (Exception e) {
@@ -131,13 +137,15 @@ public class database {
 		}
 	}
 	
-	public void update(String account,String name,String tele,String password){
+	public void update(String account,String name,String tele,String password,String gender,String dormitory){
 		try{
-			statement=connection.prepareStatement("update login set name = ?,tele = ?,password = ? where account = ?");
+			statement=connection.prepareStatement("update login set name = ?,tele = ?,password = ?,gender = ?, dormitory_name = ? where account = ?");
 			statement.setString(1, name);
 			statement.setString(2, tele);
 			statement.setString(3, password);
-			statement.setString(4, account);
+			statement.setString(4, gender);
+			statement.setString(5, dormitory);
+			statement.setString(6, account);
 			statement.executeUpdate();
 		}
 		catch (Exception e) {

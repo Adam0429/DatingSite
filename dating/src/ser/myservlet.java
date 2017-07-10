@@ -73,18 +73,22 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 		
 			System.out.println("-----insert-----");
 			Login login=new Login();
-			login.setName(request.getParameter("name"));
-			login.setTele(request.getParameter("tele"));
+			System.out.println(request.getParameter("gender"));
 			login.setAccount(request.getParameter("account"));
+			login.setName(request.getParameter("name"));
 			login.setPassword(request.getParameter("password"));
+			login.setGender(request.getParameter("gender"));
+			login.setTele(request.getParameter("tele"));
+			login.setDormitory(request.getParameter("dormitory"));
 			d.save(login);
-			response.sendRedirect("/dating/index.jsp");
+			response.sendRedirect("/dating/success.jsp");
 		}
 		
 		
 		else if(status.equals("queryname")){//应考虑到账号重复的情况,服务器端能收到报错,用户并不知道错误
 		
 			System.out.println("------queryname-----");
+
 			String nameOraccount=request.getParameter("nameOraccount").toString();
 			//request.getAttribute("username")是获取容器里面的值，在整个容器中有效,如tomcat
 			//request.getParameter("username") 是获取上一个页面传入本页面的值,得到的是GET/POST和表单传递过来的字符串
@@ -132,7 +136,8 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 		else if(status.equals("update")){
 			
 			System.out.println("------update-----");
-			d.update(request.getParameter("account"),request.getParameter("name"),request.getParameter("tele"),request.getParameter("password"));
+			System.out.println(request.getParameter("gender"));
+			d.update(request.getParameter("account"),request.getParameter("name"),request.getParameter("tele"),request.getParameter("password"),request.getParameter("gender"),request.getParameter("dormitory"));
 		
 		}
 	}

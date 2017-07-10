@@ -1,10 +1,15 @@
 create table login(
-name varchar(20),
-tele varchar(20),
 account varchar(20) primary key,
-password varchar(20)
+password varchar(20),
+name varchar(20),
+gender varchar(10),
+tele varchar(20),
+dormitory_name varchar(20) references dormitory(name)
+
 )character set = utf8;
 
+
 create table dormitory(
-name varchar(20)
+name varchar(20) primary key
 )character set = utf8;
+

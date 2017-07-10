@@ -32,23 +32,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <table border="1">
     	<tr>
-    		<td>index</td>
-  			<td>name</td>
-  			<td>account</td>
-  			<td>telephone</td>
+    		<td>编号</td>
+  			<td>账号</td>
+  			<td>昵称</td>
+  			<td>性别</td>
+  			<td>手机号</td>
+  			<td>宿舍</td>
   			<td>更新</td>
   			<td>删除</td>
   		</tr>
    	 	<c:forEach items="${requestScope.Logins}" var="l" varStatus="num">
    			<tr>
    				<td>${num.count}</td>
-   				<td>${l.name}</td>						<!-- 一些符号不能通过超链接传值,所以选择用jstl -->
    				<td>${l.account}</td>
+   				<td>${l.name}</td>						<!-- 一些符号不能通过超链接传值,所以选择用jstl -->
+   				<td>${l.gender}</td>
    				<td>${l.tele}</td>
+   				<td>${l.dormitory}</td>
    				<td><c:url value="/update.jsp" var="update">
    					<c:param name="account" value="${l.account}"></c:param><!-- 这个l.account会自动调用login里的get方法获取值,经试验没有get方法会报错,get方法名不影响运行 -->>
    					<c:param name="name" value="${l.name}"></c:param>
    					<c:param name="tele" value="${l.tele}"></c:param>
+   					<c:param name="gender" value="${l.gender}"></c:param>
+   					<c:param name="dormitory" value="${l.dormitory}"></c:param>
    					<c:param name="password" value="${l.password}"></c:param>
    					</c:url>
    					<a href="${update}">更新</a>			<!-- href相当于表单,调用doGet -->

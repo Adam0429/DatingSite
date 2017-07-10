@@ -4,7 +4,10 @@ public class Login {
 	private String name; //封装的重要性
 	private String account;
 	private String password;
+	private String gender;
+	private String dormitory;
 	private String tele;
+	
 	public String getName() {
 		return name;
 	}
@@ -22,6 +25,18 @@ public class Login {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getDormitory() {
+		return dormitory;
+	}
+	public void setDormitory(String dormitory) {
+		this.dormitory = dormitory;
 	}
 	public String getTele() {
 		return tele;
