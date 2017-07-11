@@ -30,18 +30,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      	昵称:<input type="text" name="name" value="${param.name}"><br>
      	手机号:<input type="text" name="tele" value="${param.tele}"><br>
      	密码:<input type="text" name="password" value="${param.password}"><br>
-     	性别:
-   			男<input type="radio" name="gender" checked="true" value="男">
-     		女<input type="radio" name="gender" value="女"><br>
-     	宿舍楼:<select name="dormitory" style="width: 97px; ">
+     	性别:<c:choose>
+     			<c:when test="${param.gender=='男'}">
+   					男<input type="radio" name="gender" checked="true" value="男">
+   					女<input type="radio" name="gender" value="女"><br>
+   				</c:when>
+   				<c:when test="${param.gender=='女'}">
+   					男<input type="radio" name="gender" value="男">
+   					女<input type="radio" name="gender" checked="true" value="女"><br>
+   				</c:when>
+   				<c:otherwise>
+   					男<input type="radio" name="gender" value="男">
+   					女<input type="radio" name="gender" value="女"><br>
+   				</c:otherwise>
+   				</c:choose>
+   				
+     		
+     	宿舍楼:<select name="dormitory" >
      		<option value=""> </option> 
      		<c:forEach items="${applicationScope.arraylist}" var="a">
      			<c:choose>
-     				<c:when test="${param.dormitory}==a.name">
+     				<c:when test="${a.name==param.dormitory}">
      					<option value="${a.name}" selected="selected">${a.name}</option>
      				</c:when>
      				<c:otherwise>
-     					<option>${a.name}</option>
+     					<option value="${a.name}">${a.name}</option>
 					</c:otherwise>
 				</c:choose>
      		</c:forEach>

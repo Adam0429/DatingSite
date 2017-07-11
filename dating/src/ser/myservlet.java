@@ -65,7 +65,7 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");//数据被存入了request当中,所以request也要设置编码
+	
 		String status=request.getParameter("status");
 		database d=new database();
 		//不要把存储数据的对象设置为全局变量,因为servlet是单态类

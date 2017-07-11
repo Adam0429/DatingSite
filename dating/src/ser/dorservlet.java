@@ -59,7 +59,6 @@ public class dorservlet extends HttpServlet {
 	 
 	 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setCharacterEncoding("utf-8");//这句话一定要放在第一个说
 		String status=request.getParameter("status");
 		database d=new database();
 		if(status.equals("insertdormitory")){

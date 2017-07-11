@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>
   	
      <form action="/dating/myser" method="post">
-     中蓝公寓通知群----一些重要的通知都会发放在这里,请同学们多多查看--来自校领导<br>
+     中蓝公寓通知群----一些重要的通知都会发放在这里,请同学们多多查看--来自校领导  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/dating/login.jsp">后台</a><br>
      	注册   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="query.jsp">-----查询-----</a> <br>
      	账号:<input type="text" name="account"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
      	密码:<input type="text" name="password"><br>
