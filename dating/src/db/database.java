@@ -14,6 +14,7 @@ public class database {
 	String driver = "com.mysql.jdbc.Driver";
 	java.sql.Connection connection=null;
 	java.sql.PreparedStatement statement=null;
+	int size=5;//每页有多少数据
 	
 	public database(){
 		try {
@@ -51,13 +52,15 @@ public class database {
 		}
 	}
 	
-	public ArrayList<Login> query(String string,String attribute){
+	public ArrayList<Login> query(String string,String attribute,int page){
 		java.sql.ResultSet resultSet=null;
 		ArrayList<Login> arrayList=new ArrayList<Login>();
 		if(attribute=="name"){
 			try{
-				statement=connection.prepareStatement("select * from login where name like ?");
+				statement=connection.prepareStatement("select * from login where name like ? limit ?,?");
 				statement.setString(1, "%"+string+"%");
+				statement.setInt(2, (page-1)*size);
+				statement.setInt(3, size);
 				resultSet=statement.executeQuery();
 				while(resultSet.next()){
 					Login login=new Login();
@@ -75,8 +78,10 @@ public class database {
 		}
 		else if(attribute=="account"){
 			try{
-				statement=connection.prepareStatement("select * from login where account like ? ");
+				statement=connection.prepareStatement("select * from login where account like ? limit ?,?");
 				statement.setString(1, "%"+string+"%");
+				statement.setInt(2, (page-1)*size);
+				statement.setInt(3, size);
 				resultSet=statement.executeQuery();
 				while(resultSet.next()){
 					Login login=new Login();
@@ -150,7 +155,47 @@ public class database {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	public int countpage(String string,String attribute){
+		int page=0;
+		java.sql.ResultSet resultSet=null;
+		ArrayList<Login> arrayList=new ArrayList<Login>();
+		if(attribute=="name"){
+			try{
+				statement=connection.prepareStatement("select count(*) as total from login where name like ?");
+				statement.setString(1, "%"+string+"%");
+				resultSet=statement.executeQuery();
+				if(resultSet.next()){
+					int total=resultSet.getInt("total");
+					if(total%size==0)	
+						page=total/size;
+					else 
+						page=total/size+1;
+				}
+			}
+				catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-				
+		
+		else if(attribute=="account"){
+			try{
+				statement=connection.prepareStatement("select count(*) as total from login where account like ?");
+				statement.setString(1, "%"+string+"%");
+				resultSet=statement.executeQuery();
+				if(resultSet.next()){
+					int total=resultSet.getInt("total");
+					if(total%size==0)	
+						page=total/size;
+					else
+						page=total/size+1;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return page;
 	}
 }

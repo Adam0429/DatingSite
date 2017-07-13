@@ -44,9 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		</c:forEach>
      		</select><br>
   		<input type="submit" value="submit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
-     
+     	${RegisterError}
      	<input type="hidden" name="status" value="insert">
 	</form>
+	
   </body>
   
 </html>

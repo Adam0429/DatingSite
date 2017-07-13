@@ -70,30 +70,42 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 		database d=new database();
 		//不要把存储数据的对象设置为全局变量,因为servlet是单态类
 		if(status.equals("insert")){
-		
+			
 			System.out.println("-----insert-----");
 			Login login=new Login();
-			System.out.println(request.getParameter("gender"));
-			login.setAccount(request.getParameter("account"));
-			login.setName(request.getParameter("name"));
-			login.setPassword(request.getParameter("password"));
-			login.setGender(request.getParameter("gender"));
-			login.setTele(request.getParameter("tele"));
-			login.setDormitory(request.getParameter("dormitory"));
-			d.save(login);
-			response.sendRedirect("/dating/success.jsp");
+			if(request.getParameter("account")!=""&&request.getParameter("password")!=""&&request.getParameter("name")!=""){
+				login.setAccount(request.getParameter("account"));
+				login.setName(request.getParameter("name"));
+				login.setPassword(request.getParameter("password"));
+				login.setGender(request.getParameter("gender"));
+				login.setTele(request.getParameter("tele"));
+				login.setDormitory(request.getParameter("dormitory"));
+				d.save(login);
+				response.sendRedirect("/dating/success.jsp");
+			}
+			else {
+				request.setAttribute("RegisterError", "注册失败,用户名 密码 昵称 不能为空");
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			}
 		}
 		
 		
 		else if(status.equals("queryname")){//应考虑到账号重复的情况,服务器端能收到报错,用户并不知道错误
 		
 			System.out.println("------queryname-----");
-
+			
 			String nameOraccount=request.getParameter("nameOraccount").toString();
-			//request.getAttribute("username")是获取容器里面的值，在整个容器中有效,如tomcat
+			
+
+			//request.getAttribute("username")是获取setattribute里的或是容器里面的值，在整个容器中有效,如tomcat
 			//request.getParameter("username") 是获取上一个页面传入本页面的值,得到的是GET/POST和表单传递过来的字符串
+			//这两种要分清使用
+			int totalpage=d.countpage(nameOraccount, "name");
 			request.getSession().setAttribute("nameOraccount",nameOraccount);
-			ArrayList<Login> arrayList=d.query(nameOraccount,"name");
+			request.getSession().setAttribute("page",1);
+			request.getSession().setAttribute("totalpage",totalpage);
+			request.getSession().setAttribute("querystatus", status);//为了给splitpage识别用什么方法
+			ArrayList<Login> arrayList=d.query(nameOraccount,"name",1);
 			request.setAttribute("Logins", arrayList);//把ser的数据传到视图页面(jsp)
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
 			/*转发是,servlet用一个命令把一个页面返回给用户（用户->ser->页面->用户）,重定向是servlet告诉用户要去访问一个页面
@@ -110,16 +122,34 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			
 			System.out.println("------queryaccount-----");
 			String nameOraccount=request.getParameter("nameOraccount").toString();
+			
+			
+			int totalpage=d.countpage(nameOraccount, "account");
 			request.getSession().setAttribute("nameOraccount",nameOraccount);
-			ArrayList<Login> arrayList=d.query(nameOraccount,"account");
+			request.getSession().setAttribute("page",1);
+			request.getSession().setAttribute("totalpage",totalpage);
+			request.getSession().setAttribute("querystatus", status);
+			ArrayList<Login> arrayList=d.query(nameOraccount,"account",1);
 			request.setAttribute("Logins", arrayList);
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
 			dispatcher.forward(request, response);
 		}
-		//System.out.println(request.getParameter("name"));
-		//System.out.println(request.getParameter("tele"));
-		//System.out.println(request.getParameter("account"));
-		//System.out.println(request.getParameter("password"));
+		
+		else if(status.equals("splitpage")){
+			System.out.println("------split------");
+			String querystatus=request.getSession().getAttribute("querystatus").toString();
+			ArrayList<Login> arrayList = null;
+			int page=Integer.parseInt(request.getParameter("page"));//这里的page是通过url的方式传过来的,不会上面setattribute里的
+			String nameOraccount=request.getSession().getAttribute("nameOraccount").toString();
+			request.getSession().setAttribute("page",page);
+			if(querystatus.equals("queryname"))
+				arrayList=d.query(nameOraccount,"name",page);
+			else if(querystatus.equals("queryaccount"))
+				arrayList=d.query(nameOraccount,"account",page);
+			request.setAttribute("Logins", arrayList);
+			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
+			dispatcher.forward(request, response);
+		}
 		
 		else if(status.equals("delete")){
 			
@@ -127,7 +157,7 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			
 			d.delete(request.getParameter("account"));
 
-			ArrayList<Login> arrayList=d.query(request.getSession().getAttribute("nameOraccount").toString(),"account");
+			ArrayList<Login> arrayList=d.query(request.getSession().getAttribute("nameOraccount").toString(),"account",1);
 			request.setAttribute("Logins", arrayList);
 			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
 			dispatcher.forward(request, response);

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <form action="/dating/myser" method="post">
-  <input type="text" name="nameOraccount"> <br>
+  <input type="text" name="nameOraccount" value="${sessionScope.nameOraccount}"> <br>
   <input type="submit" name="status" value="queryname">
   <input type="submit" name="status" value="queryaccount">
   </form>
@@ -69,5 +69,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			</tr>
    		</c:forEach>
    	</table>
+   	<c:choose>
+   		<c:when test="${!empty sessionScope.page}">
+   			
+   		
+   			<a href="/dating/myser?status=splitpage&page=1">首页</a>
+   		
+		<c:choose>
+			<c:when test="${sessionScope.page==1}">
+				上一页
+			</c:when>
+			<c:otherwise>
+				<a href="/dating/myser?status=splitpage&page=${sessionScope.page-1}">上一页</a>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${sessionScope.page==sessionScope.totalpage}">
+				下一页 
+			</c:when>
+			<c:otherwise>
+				<a href="/dating/myser?status=splitpage&page=${sessionScope.page+1}">下一页 </a>
+			</c:otherwise>
+		</c:choose>
+		<a href="/dating/myser?status=splitpage&page=${sessionScope.totalpage}">尾页 </a>
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共${sessionScope.totalpage}页
+		</c:when>
+	</c:choose>
   </body>
 </html>
