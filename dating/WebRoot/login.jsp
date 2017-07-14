@@ -25,9 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<form action="/dating/adminser" method="post">
- 		管理员账号:<input type="text" name="account"> <br>
-     	管理员密码:<input type="password" name="password"><br>
+ 		管理员账号:<input type="text" name="account" value="${requestScope.account}"> <br>
+     	管理员密码:<input type="password" name="password" value="${requestScope.account}"><br>
      	<input type="submit" value="submit" color=red>
+     	<input type="hidden" name="status" value="login"> 
      </form>
      	${error}
      	
