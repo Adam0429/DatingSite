@@ -3,6 +3,7 @@ package db;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -158,6 +159,24 @@ public class database {
 		}		
 	}
 	
+	public boolean check(String account,String password){
+		java.sql.ResultSet resultSet=null;
+		try{
+			statement=connection.prepareStatement("select password from login where account = ?");
+			statement.setString(1, account);
+			resultSet=statement.executeQuery();
+			if(resultSet.next()){
+				System.out.println(resultSet.getString("password"));
+				if(password.equals(resultSet.getString("password")))
+					return true;
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public int countpage(String string,String attribute){
 		int page=0;
 		java.sql.ResultSet resultSet=null;
@@ -198,4 +217,9 @@ public class database {
 		}
 		return page;
 	}
+	
+	public void newbbs(String bbs_id,String bbs_content,String bbs_title,String bbs_time,String login_account){
+		
+	}
+	
 }

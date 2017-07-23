@@ -24,13 +24,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<form action="/dating/loginser" method="post">
- 		账号:<input type="text" name="loginaccount" value="${requestScope.loginaccount}"> <br>
-     	密码:<input type="password" name="loginpassword" value="${requestScope.loginaccount}"><br>
+  	<form action="/dating/adminser" method="post">
+ 		管理员账号:<input type="text" name="adminaccount" value="${requestScope.adminaccount}"> <br>
+     	管理员密码:<input type="password" name="adminpassword" value="${requestScope.adminaccount}"><br>
      	<input type="submit" value="submit" color=red>
-     	<input type="hidden" name="status" value="login"> 
+     	<input type="hidden" name="status" value="adminlogin"> 
      </form>
-     	${requestScope.error}
+     	${requestScope.adminerror}
      	
   </body>
 </html>

@@ -8,17 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.database;
+
 /**
- * Servlet implementation class adminservlet
+ * Servlet implementation class loginservlet
  */
-@WebServlet("/adminservlet")
-public class adminservlet extends HttpServlet {
+@WebServlet("/loginservlet")
+public class loginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminservlet() {
+    public loginservlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,39 +37,48 @@ public class adminservlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String status=request.getParameter("status");
-		String account=request.getParameter("adminaccount");
-		String password=request.getParameter("adminpassword");
-		if(status.equals("adminlogin")){
-			System.out.println("adminlogin");
-			if(account.equals(password)){
+		System.out.println(status);
+		String account=request.getParameter("loginaccount");
+		String password=request.getParameter("loginpassword");
+		database database=new database();
+		if(status.equals("login")){
+			System.out.println("login");
+			if(database.check(account, password)){
 				System.out.println("ÕýÈ·");
-				request.getSession().setAttribute("adminname", account);
-				Cookie cookieaccount=new Cookie("adminaccount",account);
-				Cookie cookiepassword=new Cookie("adminpassword",password);
+				request.getSession().setAttribute("loginaccount", account);
+				Cookie cookieaccount=new Cookie("loginaccount",account);
+				Cookie cookiepassword=new Cookie("loginpassword",password);
 				cookieaccount.setMaxAge(2323232);
 				cookiepassword.setMaxAge(cookieaccount.getMaxAge());
 				response.addCookie(cookieaccount);//½«cookie±£´æÔÚ¿Í»§¶Ë
 				response.addCookie(cookiepassword);
-				response.sendRedirect("/dating/admin/admin.jsp");
+				response.sendRedirect("/dating/login/loginframe.jsp");
 			}
 			else{
 				System.out.println("´íÎó");
-				request.setAttribute("adminerror", "µÇÂ¼Ê§°Ü");
-				request.getRequestDispatcher("/adminlogin.jsp").forward(request, response);
+				request.setAttribute("error", "ÕËºÅ»òÃÜÂë´íÎó");
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 		}
-		if(status.equals("adminauto")){
-			System.out.println("adminauto");
+		
+		if(status.equals("loginauto")){
+			System.out.println("loginauto");
 			Cookie[] cookies=request.getCookies();
 			for(Cookie cookie:cookies){
-				if(cookie.getName().equals("adminaccount"))
-					request.setAttribute("adminaccount", cookie.getValue());
-				if(cookie.getName().equals("adminpassword"))
-					request.setAttribute("adminpassword", cookie.getValue());
+				if(cookie.getName().equals("loginaccount"))
+					request.setAttribute("loginaccount", cookie.getValue());
+				
+				if(cookie.getName().equals("loginpassword")){
+					request.setAttribute("loginpassword", cookie.getValue());
+					System.out.println(cookie.getValue());
+				}
 			}
-			request.getRequestDispatcher("/adminlogin.jsp").forward(request, response);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-	
+		
+		if(status.equals("newbbs")){
+			System.out.println("new bbs");
+		}
 	}
 
 }

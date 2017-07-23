@@ -11,15 +11,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Servlet Filter implementation class adminfilter
+ * Servlet Filter implementation class loginfilter
  */
-@WebFilter("/adminfilter")
-public class adminfilter implements Filter {
+@WebFilter("/loginfilter")
+public class loginfilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public adminfilter() {
+    public loginfilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -34,12 +34,13 @@ public class adminfilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(((HttpServletRequest)request).getSession().getAttribute("adminname")!=null){
+		if(((HttpServletRequest)request).getSession().getAttribute("loginaccount")!=null){
 			chain.doFilter(request, response);
 		}
 		else{
-			request.setAttribute("adminerror","·Ç·¨·ÃÎÊ");
-			request.getRequestDispatcher("/adminlogin.jsp").forward(request, response);
+			((HttpServletRequest)request).getSession().setAttribute("loginerror","µÇÂ¼Ê§°Ü");
+			((HttpServletRequest)request).getRequestDispatcher("/login.jsp").forward(request, response);
+
 		}
 	}
 

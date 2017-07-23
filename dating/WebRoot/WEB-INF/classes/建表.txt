@@ -13,3 +13,10 @@ create table dormitory(
 name varchar(20) primary key
 )character set = utf8;
 
+create table bbs(
+bbs_id varchar(20) primary key,
+bbs_content varchar(1000),
+bbs_title varchar(50),
+bbs_time datetime,
+login_account varchar(20) references login(account),
+)character set = utf8;

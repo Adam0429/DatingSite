@@ -9,13 +9,21 @@
     <filter-name>encodefilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-    <filter>
+  <filter>
     <filter-name>adminfilter</filter-name>
     <filter-class>filter.adminfilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>adminfilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>loginfilter</filter-name>
+    <filter-class>filter.loginfilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginfilter</filter-name>
+    <url-pattern>/login/*</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>myser</servlet-name>
@@ -24,6 +32,10 @@
   <servlet>
     <servlet-name>dorser</servlet-name>
     <servlet-class>ser.dorservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>loginser</servlet-name>
+    <servlet-class>ser.loginservlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>initser</servlet-name>
@@ -41,6 +53,10 @@
   <servlet-mapping>
     <servlet-name>dorser</servlet-name>
     <url-pattern>/dorser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>loginser</servlet-name>
+    <url-pattern>/loginser</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>adminser</servlet-name>
