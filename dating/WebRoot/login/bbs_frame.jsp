@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'newbbs.jsp' starting page</title>
+    <title>My JSP 'bbs_frame.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -21,13 +22,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  
+  <a href="/dating/login/loginframe.jsp">返回<a>
+  	<c:forEach items="${requestScope.bbs_arraylist}" var="b">
+		第${b.bbs_id}条帖子<br><br>
+		${b.bbs_content}<br><br>
+		发言者:${b.login_account}<br><br><br>
+  	</c:forEach>
   <body>
-    请在这里发言<br>
-    <form action="/dating/loginser" method="post"> 
-    	<input type="text" name="bbs_content" style="height: 127px; width: 503px"><br>
-    	<input type="submit" value="提交">
-    	<input type="hidden" name="status" value="newbbs">
-    </form>
+     <br>
   </body>
 </html>

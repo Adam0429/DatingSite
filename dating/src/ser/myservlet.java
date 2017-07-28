@@ -154,13 +154,17 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 		else if(status.equals("delete")){
 			
 			System.out.println("------delete-----");
-			
-			d.delete(request.getParameter("account"));
+			if(request.getSession().getAttribute("adminname")!=null){
+				d.delete(request.getParameter("account"));
 
-			ArrayList<Login> arrayList=d.query(request.getSession().getAttribute("nameOraccount").toString(),"account",1);
-			request.setAttribute("Logins", arrayList);
-			RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
-			dispatcher.forward(request, response);
+				ArrayList<Login> arrayList=d.query(request.getSession().getAttribute("nameOraccount").toString(),"account",1);
+				request.setAttribute("Logins", arrayList);
+				RequestDispatcher dispatcher= request.getRequestDispatcher("/query.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			else
+				response.sendRedirect("/dating/noadmin.jsp");
 		}
 		
 		else if(status.equals("update")){

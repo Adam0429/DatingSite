@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'newbbs.jsp' starting page</title>
+    <title>My JSP 'noadmin.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,11 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    请在这里发言<br>
-    <form action="/dating/loginser" method="post"> 
-    	<input type="text" name="bbs_content" style="height: 127px; width: 503px"><br>
-    	<input type="submit" value="提交">
-    	<input type="hidden" name="status" value="newbbs">
-    </form>
+    没有管理员权限 <br>
   </body>
 </html>

@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -10,6 +11,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import info.Dormitory;
 import info.Login;
+import info.bbs;
 
 public class database {
 	String driver = "com.mysql.jdbc.Driver";
@@ -218,8 +220,49 @@ public class database {
 		return page;
 	}
 	
-	public void newbbs(String bbs_id,String bbs_content,String bbs_title,String bbs_time,String login_account){
-		
+	public void newbbs(String bbs_id,String bbs_content,String login_account){
+		try{
+			statement=connection.prepareStatement("insert into bbs (bbs_id,bbs_content,login_account) values (?,?,?)");
+			statement.setString(1,bbs_id);
+			statement.setString(2,bbs_content);
+			statement.setString(3,login_account);
+			statement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-}
+	public ArrayList<bbs> querybbs(){
+		java.sql.ResultSet resultSet=null;
+		ArrayList<bbs> arrayList=new ArrayList<bbs>();
+		try{
+			statement=connection.prepareStatement("select * from bbs");
+			resultSet=statement.executeQuery();
+			while(resultSet.next()){
+				bbs b=new bbs();
+				b.setBbs_id(resultSet.getString("bbs_id"));
+				b.setBbs_content(resultSet.getString("bbs_content"));
+				b.setLogin_account(resultSet.getString("login_account"));
+				arrayList.add(b);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arrayList;
+	}
+	
+	public String bbs_number(){
+		String number="0";
+		try{
+			java.sql.ResultSet resultSet=null;
+			statement=connection.prepareStatement("select count(*) as bbs_number from bbs");
+			resultSet=statement.executeQuery();
+			if(resultSet.next()){
+				number=resultSet.getString("bbs_number");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return number;
+	}
+} 

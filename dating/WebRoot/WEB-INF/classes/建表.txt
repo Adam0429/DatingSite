@@ -18,5 +18,5 @@ bbs_id varchar(20) primary key,
 bbs_content varchar(1000),
 bbs_title varchar(50),
 bbs_time datetime,
-login_account varchar(20) references login(account),
+login_account varchar(20) references login(account)
 )character set = utf8;

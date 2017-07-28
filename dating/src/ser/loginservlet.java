@@ -1,6 +1,10 @@
 package ser;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.database;
+import info.bbs;
 
 /**
  * Servlet implementation class loginservlet
@@ -20,6 +25,11 @@ public class loginservlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	public void init() throws ServletException {
+		System.out.println("login!!!!!!!!!!!!!!!!!!!!!!!");
+		//System.out.println("ËÞÉásize:"+arrayList.size());
+	}
+	
     public loginservlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -42,7 +52,7 @@ public class loginservlet extends HttpServlet {
 		String password=request.getParameter("loginpassword");
 		database database=new database();
 		if(status.equals("login")){
-			System.out.println("login");
+
 			if(database.check(account, password)){
 				System.out.println("ÕýÈ·");
 				request.getSession().setAttribute("loginaccount", account);
@@ -62,7 +72,7 @@ public class loginservlet extends HttpServlet {
 		}
 		
 		if(status.equals("loginauto")){
-			System.out.println("loginauto");
+
 			Cookie[] cookies=request.getCookies();
 			for(Cookie cookie:cookies){
 				if(cookie.getName().equals("loginaccount"))
@@ -70,14 +80,24 @@ public class loginservlet extends HttpServlet {
 				
 				if(cookie.getName().equals("loginpassword")){
 					request.setAttribute("loginpassword", cookie.getValue());
-					System.out.println(cookie.getValue());
+
 				}
 			}
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 		if(status.equals("newbbs")){
-			System.out.println("new bbs");
+			database.newbbs(database.bbs_number(),request.getParameter("bbs_content"),request.getSession().getAttribute("loginaccount").toString());
+			ArrayList<bbs> arrayList= database.querybbs();
+			request.setAttribute("bbs_arraylist", arrayList);
+			request.getRequestDispatcher("/login/bbs_frame.jsp").forward(request, response);
+		}
+		
+		if(status.equals("browse_bbs")){
+			
+			ArrayList<bbs> arrayList= database.querybbs();
+			request.setAttribute("bbs_arraylist", arrayList);
+			request.getRequestDispatcher("/login/bbs_frame.jsp").forward(request, response);
 		}
 	}
 
