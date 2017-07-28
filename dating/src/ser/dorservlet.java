@@ -72,7 +72,7 @@ public class dorservlet extends HttpServlet {
 			ArrayList<Dormitory> arrayList= d.querydormitory();
 			ServletContext app = this.getServletContext();
 			app.setAttribute("arraylist", arrayList);
-			response.sendRedirect("/dating/dormitory.jsp");
+			response.sendRedirect("/dating/admin/dormitory.jsp");
 		}
 		
 		else if(status.equals("deletedormitory")){
@@ -86,7 +86,7 @@ public class dorservlet extends HttpServlet {
 			arrayList=d.querydormitory();
 			ServletContext app=request.getServletContext();
 			app.setAttribute("arraylist", arrayList);
-			response.sendRedirect("/dating/updatedor.jsp");//外部跳转,可以跳转到外网,但是不能转发request
+			response.sendRedirect("/dating/admin/updatedor.jsp");//外部跳转,可以跳转到外网,但是不能转发request
 //			RequestDispatcher dispatcher=request.getRequestDispatcher("/updatedor.jsp");
 //			dispatcher.forward(request, response);
 			

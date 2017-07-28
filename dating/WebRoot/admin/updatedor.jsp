@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'admin.jsp' starting page</title>
+    <title>修改宿舍信息</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,9 +24,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   	管理员界面  <br>
-   	<a href="/dating/query.jsp"> 管理账户</a>
-   	<a href="/dating/admin/dormitory.jsp"> 查询宿舍</a>
-   	<a href="/dating/admin/updatedor.jsp"> 修改宿舍</a>
+    修改宿舍信息 <br>
+    <table borde="1">
+    	<tr>
+   			<td>编号</td>
+    		<td>宿舍名</td>
+    		<td>删除</td>
+		</tr>
+		<c:forEach items="${applicationScope.arraylist}" var="a" varStatus="num">
+			<tr>
+				<td>${num.count}</td>
+				<td>${a.name}</td>
+				<td><c:url value="/dorser" var="delete">
+				<c:param name="dormitory" value="${a.name}"></c:param>
+				<c:param name="status" value="deletedormitory"></c:param></c:url>
+				<a href="${delete}">删除</a></td>
+				
+			<tr>
+		</c:forEach>
+	</table>
   </body>
 </html>

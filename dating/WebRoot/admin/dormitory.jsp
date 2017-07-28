@@ -1,4 +1,6 @@
+<!-- jsp的声明 --,这个语句是用来拼装当前网页的相对路径的>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'admin.jsp' starting page</title>
+    <title>My JSP 'index.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,13 +21,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
-  </head>
+</head>
   
   <body>
-   	管理员界面  <br>
-   	<a href="/dating/query.jsp"> 管理账户</a>
-   	<a href="/dating/admin/dormitory.jsp"> 查询宿舍</a>
-   	<a href="/dating/admin/updatedor.jsp"> 修改宿舍</a>
+  <%
+
+   %>
+  	
+     <form action="/dating/dorser" method="post">
+     	添加新宿舍 <a href="updatedor.jsp">查询与更新</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.jsp">返回</a> <br>
+     	新宿舍名:<input type="text" name="dormitory"><br>
+  		<input type="submit" value="submit" style="color:red">
+     
+     	<input type="hidden" name="status" value="insertdormitory">
+	</form>
   </body>
+  
 </html>
