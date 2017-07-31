@@ -1,5 +1,6 @@
 select * from bbs;
 insert into bbs (bbs_id,bbs_content) values ("1","ถลอþสวนท");
+drop table bbs; 
 select * from login;
 SELECT * FROM login  ORDER BY account ASC LIMIT 1,2;
 select count(*) as total from login ;
@@ -27,7 +28,7 @@ name varchar(20) primary key
 drop table bbs;
 
 create table bbs(
-bbs_id varchar(20) primary key,
+bbs_id int primary key,
 bbs_content varchar(1000),
 bbs_title varchar(50),
 bbs_time datetime,

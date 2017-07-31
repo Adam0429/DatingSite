@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'login.jsp' starting page</title>
+    <title>登录</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -20,15 +20,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
   </head>
   
-  <body>
-  	<form action="/dating/loginser" method="post">
- 		账号:<input type="text" name="loginaccount" value="${requestScope.loginaccount}"> <br>
-     	密码:<input type="password" name="loginpassword" value="${requestScope.loginaccount}"><br>
-     	<input type="submit" value="submit" color=red>
+  <body><pre>
+  <h3>                                    登录账号</h3><form action="/dating/loginser" method="post">
+                                     账号:<input type="text" name="loginaccount" value="${requestScope.loginaccount}"> <br>                               <br> <br>                                     密码:<input type="password" name="loginpassword" value="${requestScope.loginaccount}"><br>
+     	                                   <br>                                           <input type="submit" value="submit" color="red">
      	<input type="hidden" name="status" value="login"> 
+     	</form>
+  </pre>
      </form>
      	${requestScope.error}
      	

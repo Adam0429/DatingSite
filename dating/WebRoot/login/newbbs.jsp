@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     请在这里发言<br>
     <form action="/dating/loginser" method="post"> 
-    	<input type="text" name="bbs_content" style="height: 127px; width: 503px"><br>
+    	<textarea name="bbs_content" style="height: 127px; width: 503px"></textarea><br>
     	<input type="submit" value="提交">
     	<input type="hidden" name="status" value="newbbs">
     </form>

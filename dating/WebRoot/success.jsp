@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <a href="/dating/loginser?status=loginauto"> 登录</a>
+    <a href="/dating/index.jsp"> 返回</a>
     <title>注册成功</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -23,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    注册成功 <br>
+  <script type="text/javascript">alert("注册成功!")</script>
   </body>
 </html>
