@@ -8,9 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <a href="/dating/loginser?status=loginauto"> 登录</a>
-    <a href="/dating/index.jsp"> 返回</a>
-    <title>注册成功</title>
+    
+    <title>My JSP 'time.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,8 +22,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
-  <script type="text/javascript">alert("注册成功!")
-  </script>
-  </body>
+  <body><%  
+	java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+  
+	java.util.Date currentTime = new java.util.Date();//得到当前系统时间  
+  
+	String str_date1 = formatter.format(currentTime); //将日期时间格式化  
+	request.setAttribute("time", str_date1);
+	%>  
+    
+</body>
 </html>

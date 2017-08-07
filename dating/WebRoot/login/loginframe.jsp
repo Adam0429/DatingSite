@@ -24,8 +24,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     欢迎！${sessionScope.loginaccount}<br>
+     欢迎！${sessionScope.loginaccount}
+      <script type="text/javascript">
+   	 	var date=new Date().getDate();
+ 		 switch(date){
+ 		 case 0:
+ 		 	document.write(",今天是星期日");
+ 		 	break;
+  		case 1:
+  			document.write(",今天是星期一");
+  			break;
+  		case 2:
+  			document.write(",今天是星期二");
+  			break;
+  		case 3:
+  			document.write(",今天是星期三");
+  			break;
+  		case 4:
+  			document.write(",今天是星期四");
+  			break;
+  		case 5:
+  			document.write(",今天是星期五");
+  			break;
+  		case 6:
+  			document.write(",今天是星期六");
+  			break;
+  			
+  }</script>
+     <br>
      <a href="/dating/login/newbbs.jsp">发言</a>..........
-     <a href="/dating/loginser?status=browse_bbs">查看帖子</a>
+     <a href="/dating/loginser?status=bbs_frame">查看帖子</a>
   </body>
 </html>

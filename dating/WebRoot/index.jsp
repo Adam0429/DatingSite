@@ -24,13 +24,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%@page import="java.util.ArrayList"%>
 </head>
   <title>中蓝公寓官网</title>
-  <body><script type="text/javascript">prompt("确定是否成年");</script>
+  <body><script type="text/javascript">alert("中蓝公寓官网");
+  
+ 	
+
+  </script>
   <%
 
    %>
   	
      <form action="/dating/myser" method="post">
-     <h3>中蓝公寓通知网</h3>
+     <h3>中蓝公寓通知网 </h3>
+     
      	<p align='left'>一些重要的通知都会发放在这里,请同学们多多查看--来自校领导  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
      		<a href="/dating/adminser?status=adminauto"> 后台</a><br>
      		</p>
@@ -50,11 +55,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		</select><br>
 上传照片:<input type="file" name="pic">
      		</pre>
-  		<input type="submit" value="submit" style="color:red"><!-- type=text是明文显示，password是密文显示,还有等等.....相当于java的api吧 -->
+  		<input type="submit" value="submit" style="color:red" onmouseover="f(this)" onmouseout="f1(this)" >
+  		<script type="text/javascript">
+  			function f(sub){
+  				sub.style.color="white";
+  			}
+  			function f1(sub){
+  				sub.style.color="red";
+  			}
+  			</script>
      	${RegisterError}
      	<input type="hidden" name="status" value="insert">
 	</form>
-	
+	 <%!    int count=0;        %>    <%    count++;    out.println("已有"+count+"人访问!");    %>
   </body>
   
 </html>

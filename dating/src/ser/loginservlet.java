@@ -87,17 +87,34 @@ public class loginservlet extends HttpServlet {
 		}
 		
 		if(status.equals("newbbs")){
-			database.newbbs(database.bbs_number(),request.getParameter("bbs_content"),request.getSession().getAttribute("loginaccount").toString());
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			java.util.Date currentTime = new java.util.Date();//得到当前系统时间  
+			String time = formatter.format(currentTime); //将日期时间格式化  
+			database.newbbs(database.bbs_number(),request.getParameter("bbs_title").toString(),request.getParameter("bbs_content").toString(),request.getSession().getAttribute("loginaccount").toString(),time);
 			ArrayList<bbs> arrayList= database.querybbs();
-			request.setAttribute("bbs_arraylist", arrayList);
+			this.getServletContext().setAttribute("bbs_arraylist", arrayList);
 			request.getRequestDispatcher("/login/bbs_frame.jsp").forward(request, response);
 		}
 		
-		if(status.equals("browse_bbs")){
+		if(status.equals("bbs_frame")){
 			
 			ArrayList<bbs> arrayList= database.querybbs();
-			request.setAttribute("bbs_arraylist", arrayList);
+			request.getSession().setAttribute("bbs_arraylist", arrayList);//存到session是为了让用户随时浏览
 			request.getRequestDispatcher("/login/bbs_frame.jsp").forward(request, response);
+		}
+		
+		if(status.equals("bbs_browse")){
+			String id=request.getParameter("bbs_id");
+			bbs b=database.bbs_browse(id);
+			request.setAttribute("bbs",b);
+			request.getRequestDispatcher("login/bbs_browse.jsp").forward(request, response);
+		}
+		
+		if(status.equals("reply")){
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			java.util.Date currentTime = new java.util.Date(); 
+			String time = formatter.format(currentTime); 
+			
 		}
 	}
 

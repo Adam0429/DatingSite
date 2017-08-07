@@ -220,12 +220,14 @@ public class database {
 		return page;
 	}
 	
-	public void newbbs(String bbs_id,String bbs_content,String login_account){
+	public void newbbs(String bbs_id,String bbs_title,String bbs_content,String login_account,String bbs_time){
 		try{
-			statement=connection.prepareStatement("insert into bbs (bbs_id,bbs_content,login_account) values (?,?,?)");
+			statement=connection.prepareStatement("insert into bbs (bbs_id,bbs_title,bbs_content,login_account,bbs_time) values (?,?,?,?,?)");
 			statement.setString(1,bbs_id);
-			statement.setString(2,bbs_content);
-			statement.setString(3,login_account);
+			statement.setString(2,bbs_title);
+			statement.setString(3,bbs_content);
+			statement.setString(4,login_account);
+			statement.setString(5,bbs_time);
 			statement.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -241,8 +243,9 @@ public class database {
 			while(resultSet.next()){
 				bbs b=new bbs();
 				b.setBbs_id(resultSet.getString("bbs_id"));
-				b.setBbs_content(resultSet.getString("bbs_content"));
 				b.setLogin_account(resultSet.getString("login_account"));
+				b.setBbs_time(resultSet.getString("bbs_time"));
+				b.setBbs_title(resultSet.getString("bbs_title"));
 				arrayList.add(b);
 			}
 		}catch (Exception e) {
@@ -251,18 +254,38 @@ public class database {
 		return arrayList;
 	}
 	
+	public bbs bbs_browse(String bbs_id){
+		java.sql.ResultSet resultSet=null;
+		bbs b=new bbs();
+		try{
+			statement=connection.prepareStatement("select * from bbs where bbs_id = ?");
+			statement.setString(1,bbs_id);
+			resultSet=statement.executeQuery();
+			if(resultSet.next()){
+				b.setBbs_id(resultSet.getString("bbs_id"));
+				b.setBbs_content(resultSet.getString("bbs_content"));
+				b.setLogin_account(resultSet.getString("login_account"));
+				b.setBbs_time(resultSet.getString("bbs_time"));
+				b.setBbs_title(resultSet.getString("bbs_title"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+	
 	public String bbs_number(){
-		String number="0";
+		int number=0;
 		try{
 			java.sql.ResultSet resultSet=null;
 			statement=connection.prepareStatement("select count(*) as bbs_number from bbs");
 			resultSet=statement.executeQuery();
 			if(resultSet.next()){
-				number=resultSet.getString("bbs_number");
+				number=resultSet.getInt("bbs_number");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return number;
+		return Integer.toString(number+1);
 	}
 } 

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,9 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <a href="/dating/loginser?status=loginauto"> 登录</a>
-    <a href="/dating/index.jsp"> 返回</a>
-    <title>注册成功</title>
+    
+    <title>My JSP 'bbs_browse.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,8 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
-  <script type="text/javascript">alert("注册成功!")
-  </script>
+  <body>	
+		帖子编号:${requestScope.bbs.bbs_id}<br><br>
+		标题: 	${requestScope.bbs.bbs_title}<br><br>
+		内容：${requestScope.bbs.bbs_content}<br><br>
+		作者：${requestScope.bbs.login_account}<br><br>
+		<input type="button" value="回复" onclick="prompt('回复${requestScope.bbs.login_account}')">
   </body>
 </html>

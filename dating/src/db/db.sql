@@ -1,5 +1,6 @@
 select * from bbs;
-insert into bbs (bbs_id,bbs_content) values ("1","ถลอþสวนท");
+insert into bbs (bbs_id,bbs_title,bbs_content,login_account) values (3,"233232","edsd","dsd");
+insert into bbs (bbs_id,bbs_time) values ("1","2017-08-06 18:16:18 ");
 drop table bbs; 
 select * from login;
 SELECT * FROM login  ORDER BY account ASC LIMIT 1,2;
@@ -34,3 +35,12 @@ bbs_title varchar(50),
 bbs_time datetime,
 login_account varchar(20) references login(account)
 )character set = utf8;
+drop table reply;
+
+create table reply(
+reply_id int primary key,
+reply_content varchar(200),
+reply_time datetime,
+bbs int references bbs(bbs_id),
+login_account varchar(20) references login(account)
+)

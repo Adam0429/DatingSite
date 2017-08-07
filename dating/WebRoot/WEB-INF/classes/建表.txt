@@ -20,3 +20,11 @@ bbs_title varchar(50),
 bbs_time datetime,
 login_account varchar(20) references login(account)
 )character set = utf8;
+
+create table reply(
+reply_id int primary key,
+reply_content varchar(200),
+reply_time datetime,
+bbs int references bbs(bbs_id),
+login_account varchar(20) references login(account)
+)

@@ -22,13 +22,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  <a href="/dating/login/loginframe.jsp">返回<a>
-  	<c:forEach items="${requestScope.bbs_arraylist}" var="b">
-		第${b.bbs_id}条帖子<br><br>
-		${b.bbs_content}<br><br>
-		发言者:${b.login_account}<br><br><br>
-  	</c:forEach>
+ 
   <body>
-     <br>
+   <pre><h2>帖子</h2>                                                                                                      <a href="/dating/login/loginframe.jsp">返回<a></pre>
+  	<c:forEach items="${applicationScope.bbs_arraylist}" var="b">
+		${b.bbs_id}:
+		<c:url value="/loginser" var="browse_bbs">
+		<c:param name="bbs_id" value="${b.bbs_id}"></c:param>
+		<c:param name="status" value="bbs_browse"></c:param>
+		</c:url>
+		<c:choose>
+			<c:when test="${empty b.bbs_title}">
+				<a href="${browse_bbs}">不知所云</a> <br>
+			</c:when>
+			<c:otherwise>
+				<a href="${browse_bbs}">${b.bbs_title}</a><br>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${empty b.login_account}">
+				作者:匿名-------发帖时间:${b.bbs_time}<br>
+			</c:when>
+			<c:otherwise>
+				作者:${b.login_account}-------发帖时间:${b.bbs_time}<br>
+			</c:otherwise>
+		</c:choose>
+  	</c:forEach>
   </body>
 </html>

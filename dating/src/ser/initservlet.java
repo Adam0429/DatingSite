@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import db.database;
 import info.Dormitory;
 import info.Login;
+import info.bbs;
 
 /**
  * Servlet implementation class initservlet
@@ -38,6 +39,8 @@ public class initservlet extends HttpServlet {
 		ArrayList<Dormitory> arrayList= d.querydormitory();
 		ServletContext app = this.getServletContext();//application∂‘œÛ
 		app.setAttribute("arraylist", arrayList);
+		ArrayList<bbs> arrayList2= d.querybbs();
+		app.setAttribute("bbs_arraylist", arrayList2);
 		//System.out.println("Àﬁ…·size:"+arrayList.size());
 	}
 
