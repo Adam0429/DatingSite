@@ -25,11 +25,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     请在这里发言<br>
     <form action="/dating/loginser" method="post"> 
-    	标题:<br><input type="text" name="bbs_title"><br><br>内容:<br>
+    	标题:<br><input type="text" name="bbs_title" "><br><br>内容:<br>
     	<textarea name="bbs_content" style="height: 127px; width: 503px"></textarea>
     	<input type="checkbox" name="noname">匿名发言<br>
     	<input type="submit" value="提交">
     	<input type="hidden" name="status" value="newbbs">
+    	<input type="submit" value="submit" style="color:red" >
     </form>
+    <script type="text/javascript">
+    	
+    	var a= document.getElementsByName("bbs_title")[0].value;
+  		alert(a);
+    	
+    </script>
   </body>
 </html>

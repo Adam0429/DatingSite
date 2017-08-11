@@ -22,12 +22,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  
+
   <body>	
+ 
 		帖子编号:${requestScope.bbs.bbs_id}<br><br>
 		标题: 	${requestScope.bbs.bbs_title}<br><br>
 		内容：${requestScope.bbs.bbs_content}<br><br>
 		作者：${requestScope.bbs.login_account}<br><br>
-		<input type="button" value="回复" onclick="prompt('回复${requestScope.bbs.login_account}')">
+		<input type="button" value="回复" id="replybutton">
+		<script type="text/javascript">
+			var button=document.getElementById("replybutton");
+			button.onclick=function(){
+				alert("回复成功!");
+			}
+		</script>
   </body>
 </html>
