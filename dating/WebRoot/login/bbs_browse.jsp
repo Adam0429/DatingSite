@@ -20,20 +20,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   </head>
 
   <body>	
  
+		<input type="button" value="返回" id="back"><br>
 		帖子编号:${requestScope.bbs.bbs_id}<br><br>
 		标题: 	${requestScope.bbs.bbs_title}<br><br>
 		内容：${requestScope.bbs.bbs_content}<br><br>
 		作者：${requestScope.bbs.login_account}<br><br>
 		<input type="button" value="回复" id="replybutton">
+		<input type="hidden" id="replycontent">
 		<script type="text/javascript">
 			var button=document.getElementById("replybutton");
+			var content=document.getElementById("replycontent");
+			var back=document.getElementById("back");
+			back.onclick=function(){
+				history.back();
+			}
 			button.onclick=function(){
-				alert("回复成功!");
+				var reply=prompt("请输入要回复的内容");
+				content.value=reply;
 			}
 		</script>
   </body>

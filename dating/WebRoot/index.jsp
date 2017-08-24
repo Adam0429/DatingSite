@@ -19,32 +19,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	
 	-->
+ 
   <%@page import="java.util.ArrayList"%>
+  <link rel="stylesheet" href="layui/css/layui.css">
 </head>
   <title>中蓝公寓官网</title>
   <body>
   
  	
 
-  </script>
+  <script src="layui/layui.js"></script>
   <%
 
    %>
+  
      <form action="/dating/myser" method="post">
+
      
-     <h3>北京工业大学中蓝公寓官网 </h3>
+     </div>
+    <ul class="layui-nav" pc>
+    <li class="layui-nav-item layui-this">
+      	 北京工业大学中蓝公寓官网 
+      </li>
+      <li class="layui-nav-item layui-this">
+        <a href="/dating/loginser?status=loginauto"> 登录</a>
+      </li>
+      <li class="layui-nav-item ">
+        <a href="javascript:;" onclick="f4()">注册<span class="layui-badge-dot"></span></a>
+      </li> 
+      
+      <li class="layui-nav-item" pc>
+        <a href="/dating/query.jsp"> 查询</a>
+      </li>
+      
+      <li class="layui-nav-item" pc>
+        <a href="javascript:;">反馈</a>
+      
+      </li>
+      <li class="layui-nav-item" mobile>
+        <a href="javascript:;" onclick="f5()">分享</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<br>
     	<div id="tip">
      		<a href="http://www.bjut.edu.cn/"><img alt="img" src="img/1.jpg" style="width: 961px; height: 318px; "></a>
      	</div>
      	<p align='left'>一些重要的通知都会发放在这里,请同学们多多查看--来自校领导  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
-     		<a href="/dating/adminser?status=adminauto"> 后台</a><br>
+     		<a href="/dating/adminser?status=adminauto"> 后台</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                              
+     		    <br>
      		</p>
+     		 
      <hr width="80%" align="left">
     	 <pre>
 注册                 <a href="/dating/loginser?status=loginauto"> 登录</a>               <a href="query.jsp">-----查询-----</a> <br>
-账号:<input type="text" name="account" id="account" value="不能为空!"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
+账号:<input type="text" name="account" id="account" value="不能为空!" id="reg"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
 密码:<input type="password" name="password" id="password" value="不能为空!"><br>
 昵称:<input type="text" name="name"><br>
 性别:男<input type="radio" name="gender" value="男" id="male"> 女<input type="radio" name="gender" value="女" id="female"><br> 	
@@ -55,10 +87,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		<option value="${a.name}">${a.name}</option>
      		</c:forEach>
      		</select><br>
-上传照片:<input type="file" name="pic">
+上传照片:<input type="file" name="pic" id="reg">
      		</pre>
-  		<input type="submit" value="submit" style="color:red" onmouseover="f(this)" onmouseout="f1(this)" onclick="alert('注册成功')">
-  		<input type="submit" value="测试" onclick=f3()>
+  		<input type="submit" value="提交注册" class="layui-btn layui-btn-radius" onmouseover="f(this)" onmouseout="f1(this)" onclick="alert('注册成功')">
+  		<input type="hidden" name="status" value="insert">
+  		 <button type="button" class="layui-btn layui-btn-mini layui-btn-radius layui-btn-disabled" onclick="f3()">意见反馈</button>
   	<script type="text/javascript">
   		var pic=1;
   		setInterval(changimg,1000);
@@ -68,6 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		var dor=document.getElementById("dormitory");
   		var male=document.getElementById("male");
   		var female=document.getElementById("female");
+  		var pa=document.getElementById("pa");
   		a.onfocus=function(){
   			if(a.value="不能为空!")
   				a.value="";
@@ -95,16 +129,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				male.checked=false;
   			}
   		}
+  	
   		function changimg(){
   			if(pic%2==1){
   				tip.innerHTML="<a href='http://www.bjut.edu.cn/'><img alt='img' src='img/2.png' style='width: 961px; height: 318px; '></a>";
   				pic++;
-
   			}
   			else{
   				tip.innerHTML="<a href='http://www.bjut.edu.cn/'><img alt='img' src='img/1.jpg' style='width: 961px; height: 318px; '></a>";
   				pic++;
-
   			}
   		}
   		
@@ -112,17 +145,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		
   	
   			function f(sub){
-  				sub.style.color="white";
-  			}
-  			function f1(sub){
   				sub.style.color="red";
   			}
+  			function f1(sub){
+  				sub.style.color="white";
+  			}
   			function f3(){
-  				alert(document.getElementById("password").value);
+  				alert('暂不支持反馈功能');
+  			}
+  			function f4(){
+  				location.hash="#reg";
+  			}
+  			function f5(){
+  				alert('复制本站地址:http://localhost:8080/dating 发给朋友');
   			}
   		</script>
+  		
      	${RegisterError}
-     	<input type="hidden" name="status" value="insert">
+     	
 
 	</form>
 	 <%!    int count=0;        %>    <%    count++;    out.println("已有"+count+"人访问!");    %>
