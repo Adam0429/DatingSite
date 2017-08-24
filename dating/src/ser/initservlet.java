@@ -16,6 +16,7 @@ import db.database;
 import info.Dormitory;
 import info.Login;
 import info.bbs;
+import info.suggest;
 
 /**
  * Servlet implementation class initservlet
@@ -41,6 +42,8 @@ public class initservlet extends HttpServlet {
 		app.setAttribute("arraylist", arrayList);
 		ArrayList<bbs> arrayList2= d.querybbs();
 		app.setAttribute("bbs_arraylist", arrayList2);
+		ArrayList<suggest> arrayList3=d.querysug();
+		app.setAttribute("sug_arraylist", arrayList3);
 		//System.out.println("Àﬁ…·size:"+arrayList.size());
 	}
 

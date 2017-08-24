@@ -12,6 +12,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import info.Dormitory;
 import info.Login;
 import info.bbs;
+import info.suggest;
 
 public class database {
 	String driver = "com.mysql.jdbc.Driver";
@@ -287,5 +288,32 @@ public class database {
 			e.printStackTrace();
 		}
 		return Integer.toString(number+1);
+	}
+	
+	public void sug(String sug){
+		try{
+			statement=connection.prepareStatement("insert into suggest values (?)");
+			statement.setString(1, sug);
+			statement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<suggest> querysug(){
+		java.sql.ResultSet resultSet=null;
+		ArrayList<suggest> arrayList=new ArrayList<suggest>();
+		try{
+			statement=connection.prepareStatement("select * from suggest");
+			resultSet=statement.executeQuery();
+			while(resultSet.next()){
+				suggest sug=new suggest();
+				sug.setSug(resultSet.getString("sug"));
+				arrayList.add(sug);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arrayList;
 	}
 } 

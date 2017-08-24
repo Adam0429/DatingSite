@@ -35,11 +35,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    %>
   
-     <form action="/dating/myser" method="post">
+    
 
      
      </div>
-    <ul class="layui-nav" pc>
+    <ul class="layui-nav layui-nav layui-bg-green" pc>
     <li class="layui-nav-item layui-this">
       	 北京工业大学中蓝公寓官网 
       </li>
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="/dating/query.jsp"> 查询</a>
       </li>
       
-      <li class="layui-nav-item" pc>
+      <li class="layui-nav-item" pc onclick="f3()">
         <a href="javascript:;">反馈</a>
       
       </li>
@@ -68,14 +68,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div id="tip">
      		<a href="http://www.bjut.edu.cn/"><img alt="img" src="img/1.jpg" style="width: 961px; height: 318px; "></a>
      	</div>
-     	<p align='left'>一些重要的通知都会发放在这里,请同学们多多查看--来自校领导  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
-     		<a href="/dating/adminser?status=adminauto"> 后台</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                              
-     		    <br>
+     	<br>
+     	<div style="width:100%;height:50px;white-space:nowrap;">
+     	<div style="display: inline-block;width:45%;"><p align='left'>一些重要的通知都会发放在这里,请同学们多多查看  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;</div>
+     	<div style="display: inline-block;width:25%;"><a href="/dating/adminser?status=adminauto">	<button class="layui-btn layui-btn-small layui-btn-radius layui-btn-danger">后台登录</button></a></div>
+     	<div div class="layui-anim layui-anim-up layui-anim-loop"style="display: inline-block;width:25%;" ><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;" onclick="f5()">&#xe641</i></div>
+ 
+</div>
+     		     <br>
      		</p>
      		 
      <hr width="80%" align="left">
-    	 <pre>
-注册                 <a href="/dating/loginser?status=loginauto"> 登录</a>               <a href="query.jsp">-----查询-----</a> <br>
+    	<ul class="layui-timeline">
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <h3 class="layui-timeline-title">6月17日</h3>
+      <p>
+        myeclipse,tomcat一切就绪...
+      </p>
+    </div>
+  </li>
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <h3 class="layui-timeline-title">7月1日</h3>
+      <p>本人怀揣梦想,开始第一页的制作...</p>
+      <ul>
+      </ul>
+    </div>
+  </li>
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <h3 class="layui-timeline-title">8月20日</h3>
+      <p>
+      	 有了自己的域名,第一次有了自己维护的网站...
+      </p>
+    </div>
+  </li>
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <div class="layui-timeline-title">过去</div>
+    </div>
+  </li>
+</ul>
+    	 <br>
+<form action="/dating/myser" method="post">
+
 账号:<input type="text" name="account" id="account" value="不能为空!" id="reg"> <!-- sname is the parameter's name , provide servlet to ues --> &nbsp;<br>
 密码:<input type="password" name="password" id="password" value="不能为空!"><br>
 昵称:<input type="text" name="name"><br>
@@ -88,10 +129,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		</c:forEach>
      		</select><br>
 上传照片:<input type="file" name="pic" id="reg">
-     		</pre>
-  		<input type="submit" value="提交注册" class="layui-btn layui-btn-radius" onmouseover="f(this)" onmouseout="f1(this)" onclick="alert('注册成功')">
+     		</pre><br>
+  		<input type="submit" value="提交注册" class="layui-btn layui-btn-radius" onmouseover="f(this)" onmouseout="f1(this)" ">
   		<input type="hidden" name="status" value="insert">
-  		 <button type="button" class="layui-btn layui-btn-mini layui-btn-radius layui-btn-disabled" onclick="f3()">意见反馈</button>
+  		${RegisterError}<br>
+  	</form>
+  			
+  		<form action="/dating/myser" id="formsug" method="post">
+  		 <button type="button" class="layui-btn layui-btn-mini layui-btn-radius " onclick="f3()">意见反馈</button>
+  		 <input type="hidden" name="suggest" id="suggest">			
+  		 <input type="hidden" name="status" value="suggest">
+  		 </form>
   	<script type="text/javascript">
   		var pic=1;
   		setInterval(changimg,1000);
@@ -151,7 +199,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				sub.style.color="white";
   			}
   			function f3(){
-  				alert('暂不支持反馈功能');
+  				document.getElementById("suggest").value=prompt();
+  				document.getElementById("formsug").submit();    
   			}
   			function f4(){
   				location.hash="#reg";
@@ -161,10 +210,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			}
   		</script>
   		
-     	${RegisterError}
      	
 
-	</form>
+
 	 <%!    int count=0;        %>    <%    count++;    out.println("已有"+count+"人访问!");    %>
   </body>
   

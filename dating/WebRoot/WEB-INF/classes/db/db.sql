@@ -44,3 +44,8 @@ reply_time datetime,
 bbs int references bbs(bbs_id),
 login_account varchar(20) references login(account)
 )
+
+create table suggest(
+sug varchar(200)
+)character set = utf8;
+select * from suggest;

@@ -18,6 +18,7 @@ import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
 import db.database;
 import info.Dormitory;
 import info.Login;
+import info.suggest;
 
 /**
  * Servlet implementation class myservlet
@@ -173,6 +174,16 @@ public class myservlet extends HttpServlet {//单态类，只能创建一次对象
 			System.out.println(request.getParameter("gender"));
 			d.update(request.getParameter("account"),request.getParameter("name"),request.getParameter("tele"),request.getParameter("password"),request.getParameter("gender"),request.getParameter("dormitory"));
 		
+		}
+		
+		else if(status.equals("suggest")){
+			System.out.println("----suggest-----");
+			String sug=request.getParameter("suggest");
+			d.sug(sug);
+			ServletContext app = this.getServletContext();
+			ArrayList<suggest> arrayList3=d.querysug();
+			app.setAttribute("sug_arraylist", arrayList3);
+			request.getRequestDispatcher("/suggest.jsp").forward(request, response);
 		}
 	}
 
