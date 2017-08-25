@@ -199,8 +199,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				sub.style.color="white";
   			}
   			function f3(){
-  				document.getElementById("suggest").value=prompt();
-  				document.getElementById("formsug").submit();    
+  				var sug=prompt();
+  				if(sug==''){
+  					alert('不能为空')
+  				}
+  				else{
+  					document.getElementById("suggest").value=sug;
+  					document.getElementById("formsug").submit();
+  				}    
   			}
   			function f4(){
   				location.hash="#reg";

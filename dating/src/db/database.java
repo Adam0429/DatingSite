@@ -12,6 +12,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import info.Dormitory;
 import info.Login;
 import info.bbs;
+import info.reply;
 import info.suggest;
 
 public class database {
@@ -288,6 +289,57 @@ public class database {
 			e.printStackTrace();
 		}
 		return Integer.toString(number+1);
+	}
+	
+	public void newreply(String reply_id,String reply_content,String bbs_id,String reply_time,String login_account){
+		try{
+			statement=connection.prepareStatement("insert into reply (reply_id,reply_content,bbs,reply_time,login_account) values (?,?,?,?,?)");
+			statement.setString(1,reply_id);
+			statement.setString(2,reply_content);
+			statement.setString(3, bbs_id);
+			statement.setString(4,reply_time);
+			statement.setString(5,login_account);
+			statement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String reply_number(){
+		int number=0;
+		try{
+			java.sql.ResultSet resultSet=null;
+			statement=connection.prepareStatement("select count(*) as reply_number from reply");
+			resultSet=statement.executeQuery();
+			if(resultSet.next()){
+				number=resultSet.getInt("reply_number");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Integer.toString(number+1);
+	}
+	
+	public ArrayList<reply> queryreply(String bbs_id){
+		java.sql.ResultSet resultSet=null;
+		ArrayList<reply> arrayList=new ArrayList<reply>();
+		try{
+			statement=connection.prepareStatement("select * from reply where bbs=?");
+			statement.setString(1, bbs_id);
+			resultSet=statement.executeQuery();
+			while(resultSet.next()){
+				reply r=new reply();
+				r.setReply_id(resultSet.getString("reply_id"));
+				r.setReply_content(resultSet.getString("reply_content"));
+				r.setBbs_id(resultSet.getString("bbs"));
+				r.setReply_time(resultSet.getString("reply_time"));
+				r.setLogin_account(resultSet.getString("login_account"));
+				arrayList.add(r);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arrayList;
 	}
 	
 	public void sug(String sug){

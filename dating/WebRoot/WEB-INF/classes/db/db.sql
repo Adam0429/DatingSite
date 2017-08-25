@@ -1,4 +1,5 @@
 select * from bbs;
+select * from reply;
 insert into bbs (bbs_id,bbs_title,bbs_content,login_account) values (3,"233232","edsd","dsd");
 insert into bbs (bbs_id,bbs_time) values ("1","2017-08-06 18:16:18 ");
 drop table bbs; 

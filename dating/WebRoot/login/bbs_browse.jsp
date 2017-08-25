@@ -20,18 +20,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="layui/css/layui.css">
+	
   </head>
 
   <body>	
- 
-		<input type="button" value="返回" id="back"><br>
+  		<script src="layui/layui.js"></script>
+ 		<form action="/dating/loginser" method="post" id="formreply"> 
+		<br>
 		帖子编号:${requestScope.bbs.bbs_id}<br><br>
 		标题: 	${requestScope.bbs.bbs_title}<br><br>
 		内容：${requestScope.bbs.bbs_content}<br><br>
 		作者：${requestScope.bbs.login_account}<br><br>
-		<input type="button" value="回复" id="replybutton">
-		<input type="hidden" id="replycontent">
+		回复：<br>
+		<c:forEach items="${sessionScope.reply_arraylist}" var="r" varStatus="num">
+			${num.count}:
+			${r.reply_content}<br>
+			发言者:${r.login_account}<br>
+			发布时间:${r.reply_time}<br><br>
+		</c:forEach>
+		<input type="button" value="回复" class="layui-btn layui-btn-small layui-btn-radius layui-btn-warm" id="replybutton">
+		<input type="hidden" id="replycontent" name="replycontent">
+		<input type="hidden" name="status" value="reply"><input type="button" value="返回" class="layui-btn layui-btn-small layui-btn-radius layui-btn-danger" id="back">
+		</form>
 		<script type="text/javascript">
 			var button=document.getElementById("replybutton");
 			var content=document.getElementById("replycontent");
@@ -40,8 +51,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				history.back();
 			}
 			button.onclick=function(){
-				var reply=prompt("请输入要回复的内容");
-				content.value=reply;
+				content.value=prompt("请输入要回复的内容");
+				document.getElementById("formreply").submit();    
 			}
 		</script>
   </body>

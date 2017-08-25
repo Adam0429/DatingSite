@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import db.database;
 import info.bbs;
+import info.reply;
 
 /**
  * Servlet implementation class loginservlet
@@ -106,15 +107,22 @@ public class loginservlet extends HttpServlet {
 		if(status.equals("bbs_browse")){
 			String id=request.getParameter("bbs_id");
 			bbs b=database.bbs_browse(id);
-			request.setAttribute("bbs",b);
+			request.getSession().setAttribute("bbs",b);
+			ArrayList<reply> arrayList=database.queryreply(id);
+			request.getSession().setAttribute("reply_arraylist",arrayList);
 			request.getRequestDispatcher("login/bbs_browse.jsp").forward(request, response);
 		}
 		
 		if(status.equals("reply")){
+			System.out.println("reply");
 			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			java.util.Date currentTime = new java.util.Date(); 
-			String time = formatter.format(currentTime); 
-			
+			String time = formatter.format(currentTime);
+			String login_account=request.getSession().getAttribute("loginaccount").toString();
+			String reply_content=request.getParameter("replycontent");
+			bbs b=(bbs) request.getSession().getAttribute("bbs");
+			String id=b.getBbs_id();
+			database.newreply(database.reply_number(), reply_content,id, time, login_account);
 		}
 	}
 
