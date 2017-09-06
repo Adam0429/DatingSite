@@ -30,12 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<input type="checkbox" name="noname">匿名发言<br>
     	<input type="submit" value="提交">
     	<input type="hidden" name="status" value="newbbs">
-    	<input type="submit" value="submit" style="color:red" >
     </form>
     <script type="text/javascript">
     	
-    	var a= document.getElementsByName("bbs_title")[0].value;
-  		alert(a);
+    	
+  		
     	
     </script>
   </body>

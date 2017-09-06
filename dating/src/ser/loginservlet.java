@@ -64,6 +64,8 @@ public class loginservlet extends HttpServlet {
 				response.addCookie(cookieaccount);//将cookie保存在客户端
 				response.addCookie(cookiepassword);
 				response.sendRedirect("/dating/login/loginframe.jsp");
+				ArrayList<bbs> arrayList= database.querybbs();
+				request.getSession().setAttribute("bbs_arraylist", arrayList);
 			}
 			else{
 				System.out.println("错误");
@@ -83,6 +85,8 @@ public class loginservlet extends HttpServlet {
 					request.setAttribute("loginpassword", cookie.getValue());
 
 				}
+				ArrayList<bbs> arrayList= database.querybbs();
+				request.getSession().setAttribute("bbs_arraylist", arrayList);
 			}
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}

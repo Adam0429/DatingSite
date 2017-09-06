@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<script src="layui/layui.js"></script>
  		<form action="/dating/loginser" method="post" id="formreply"> 
 		<br>
-		帖子编号:${requestScope.bbs.bbs_id}<br><br>
-		标题: 	${requestScope.bbs.bbs_title}<br><br>
-		内容：${requestScope.bbs.bbs_content}<br><br>
-		作者：${requestScope.bbs.login_account}<br><br>
+		帖子编号:${sessionScope.bbs.bbs_id}<br><br>
+		标题: 	${sessionScope.bbs.bbs_title}<br><br>
+		内容：${sessionScope.bbs.bbs_content}<br><br>
+		作者：${sessionScope.bbs.login_account}<br><br>
 		回复：<br>
 		<c:forEach items="${sessionScope.reply_arraylist}" var="r" varStatus="num">
 			${num.count}:
